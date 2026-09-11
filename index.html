@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JobConnect - Find Your Dream Job</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #14213d;
+            background: #f5f8fc;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        nav {
+            height: 70px;
+            background: #09264a;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 6%;
+            color: white;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #2d82ff;
+        }
+
+        .logo-icon {
+            display: inline-block;
+            background: #2d82ff;
+            padding: 8px;
+            border-radius: 8px;
+            margin-right: 8px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 38px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        nav ul li a:hover {
+            color: #2d82ff;
+        }
+
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .login {
+            color: white;
+            text-decoration: none;
+        }
+
+        .signup {
+            background: #2d82ff;
+            padding: 12px 22px;
+            border-radius: 7px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            min-height: 440px;
+            background:
+                linear-gradient(90deg,
+                rgba(4, 27, 54, 0.97) 0%,
+                rgba(4, 27, 54, 0.90) 42%,
+                rgba(4, 27, 54, 0.30) 100%),
+                url("https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1800&q=85");
+
+            background-size: cover;
+            background-position: center;
+
+            display: flex;
+            align-items: center;
+            padding: 60px 6%;
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 720px;
+        }
+
+        .small-title {
+            color: #76b5ff;
+            font-size: 17px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            line-height: 1.05;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #2d82ff;
+        }
+
+        .hero p {
+            font-size: 17px;
+            line-height: 1.6;
+            max-width: 560px;
+            color: #e4ecf7;
+            margin-bottom: 25px;
+        }
+
+        /* ================= SEARCH ================= */
+
+        .search-box {
+            background: white;
+            padding: 7px;
+            border-radius: 10px;
+            display: flex;
+            max-width: 720px;
+            color: #26384f;
+        }
+
+        .search-input {
+            flex: 2;
+            padding: 15px;
+            border-right: 1px solid #ddd;
+        }
+
+        .location-input {
+            flex: 1;
+            padding: 15px;
+            border-right: 1px solid #ddd;
+        }
+
+        .category-input {
+            flex: 1;
+            padding: 15px;
+        }
+
+        .search-box input,
+        .search-box select {
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 14px;
+            background: white;
+        }
+
+        .search-btn {
+            background: #2d82ff;
+            border: none;
+            color: white;
+            padding: 0 25px;
+            border-radius: 7px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .search-btn:hover {
+            background: #146be0;
+        }
+
+        /* ================= FEATURES ================= */
+
+        .features {
+            background: white;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            padding: 35px 6%;
+            gap: 25px;
+        }
+
+        .feature {
+            padding: 10px 20px;
+            border-right: 1px solid #e5e9ef;
+        }
+
+        .feature:last-child {
+            border-right: none;
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #e8f2ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2d82ff;
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .feature h3 {
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            color: #64748b;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        /* ================= JOBS ================= */
+
+        .jobs-section {
+            padding: 50px 6%;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .section-header h2 {
+            font-size: 30px;
+        }
+
+        .section-header p {
+            color: #718096;
+            margin-top: 5px;
+        }
+
+        .view-jobs {
+            color: #2d82ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .jobs {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .job-card {
+            background: white;
+            padding: 22px;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            border: 1px solid #e5eaf0;
+            transition: 0.3s;
+        }
+
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.10);
+        }
+
+        .company-logo {
+            width: 48px;
+            height: 48px;
+            background: #f1f5f9;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 23px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .job-card h3 {
+            margin-bottom: 7px;
+        }
+
+        .company {
+            color: #64748b;
+            margin-bottom: 15px;
+        }
+
+        .job-info {
+            color: #64748b;
+            font-size: 13px;
+            line-height: 2;
+            margin-bottom: 15px;
+        }
+
+        .apply-btn {
+            width: 100%;
+            border: none;
+            background: #2d82ff;
+            color: white;
+            padding: 11px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .apply-btn:hover {
+            background: #146be0;
+        }
+
+        /* ================= CTA ================= */
+
+        .cta {
+            margin: 0 6% 35px;
+            padding: 25px;
+            border-radius: 10px;
+            background: #e6f1ff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .cta-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .cta-icon {
+            width: 50px;
+            height: 50px;
+            background: #2d82ff;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 22px;
+        }
+
+        .cta h2 {
+            margin-bottom: 5px;
+        }
+
+        .cta p {
+            color: #64748b;
+        }
+
+        .cta-button {
+            background: #2d82ff;
+            color: white;
+            padding: 13px 25px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #09264a;
+            color: white;
+            padding: 35px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        footer .logo {
+            margin-bottom: 7px;
+        }
+
+        footer p {
+            color: #aebdd1;
+            font-size: 13px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .social {
+            font-size: 14px;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 900px) {
+
+            nav {
+                padding: 0 4%;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            .hero {
+                padding: 50px 5%;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .jobs {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .search-box {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .search-input,
+            .location-input,
+            .category-input {
+                border-right: none;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .search-btn {
+                padding: 15px;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 25px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .feature {
+                border-right: none;
+                border-bottom: 1px solid #eee;
+                padding-bottom: 20px;
+            }
+
+            .jobs {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .cta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .nav-buttons .login {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= NAVIGATION ================= -->
+
+    <nav>
+        <div class="logo">
+            <span class="logo-icon">💼</span>
+            Job<span>Connect</span>
+        </div>
+
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#jobs">Jobs</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <div class="nav-buttons">
+            <a href="#" class="login">Login</a>
+            <a href="#" class="signup">Sign Up</a>
+        </div>
+    </nav>
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="small-title">
+                Your Next Opportunity Awaits
+            </div>
+
+            <h1>
+                Find Your Dream Job
+                <span>Today</span>
+            </h1>
+
+            <p>
+                Browse thousands of jobs, get noticed by top employers,
+                and take the next step in your career.
+            </p>
+
+            <div class="search-box">
+
+                <div class="search-input">
+                    🔍
+                    <input
+                        type="text"
+                        id="keyword"
+                        placeholder="Job title, company or keyword">
+                </div>
+
+                <div class="location-input">
+                    📍
+                    <input
+                        type="text"
+                        id="location"
+                        placeholder="Location">
+                </div>
+
+                <div class="category-input">
+                    💼
+                    <select id="category">
+                        <option value="">Category</option>
+                        <option>Technology</option>
+                        <option>Finance</option>
+                        <option>Marketing</option>
+                        <option>Design</option>
+                        <option>Engineering</option>
+                    </select>
+                </div>
+
+                <button class="search-btn" onclick="searchJobs()">
+                    🔍 Search
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FEATURES ================= -->
+
+    <section class="features">
+
+        <div class="feature">
+
+            <div class="feature-icon">🔍</div>
+
+            <h3>Easy Job Search</h3>
+
+            <p>
+                Find the right job with powerful
+                search and filter options.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">📄</div>
+
+            <h3>Create Your Profile</h3>
+
+            <p>
+                Showcase your skills and experience
+                to top employers.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">🏢</div>
+
+            <h3>Top Employers</h3>
+
+            <p>
+                Get noticed by trusted companies
+                hiring near you.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">📈</div>
+
+            <h3>Grow Your Career</h3>
+
+            <p>
+                Access resources and tips to
+                help you succeed.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= JOBS ================= -->
+
+    <section class="jobs-section" id="jobs">
+
+        <div class="section-header">
+
+            <div>
+                <h2>Featured Jobs</h2>
+                <p>Handpicked opportunities from top companies</p>
+            </div>
+
+            <a href="#" class="view-jobs">
+                View All Jobs →
+            </a>
+
+        </div>
+
+
+        <div class="jobs">
+
+            <!-- JOB 1 -->
+
+            <div class="job-card">
+
+                <div class="company-logo">
+                    G
+                </div>
+
+                <h3>Frontend Developer</h3>
+
+                <div class="company">
+                    Google
+                </div>
+
+                <div class="job-info">
+                    📍 Remote<br>
+                    💼 Full-time<br>
+                    💰 $80,000 - $120,000 / year
+                </div>
+
+                <button class="apply-btn"
+                        onclick="applyJob('Frontend Developer')">
+                    Apply Now
+                </button>
+
+            </div>
+
+
+            <!-- JOB 2 -->
+
+            <div class="job-card">
+
+                <div class="company-logo">
+                    A
+                </div>
+
+                <h3>Software Engineer</h3>
+
+                <div class="company">
+                    Amazon
+                </div>
+
+                <div class="job-info">
+                    📍 Cairo, Egypt<br>
+                    💼 Full-time<br>
+                    💰 $60,000 - $90,000 / year
+                </div>
+
+                <button class="apply-btn"
+                        onclick="applyJob('Software Engineer')">
+                    Apply Now
+                </button>
+
+            </div>
+
+
+            <!-- JOB 3 -->
+
+            <div class="job-card">
+
+                <div class="company-logo">
+                    M
+                </div>
+
+                <h3>Data Analyst</h3>
+
+                <div class="company">
+                    Microsoft
+                </div>
+
+                <div class="job-info">
+                    📍 Remote<br>
+                    💼 Full-time<br>
+                    💰 $50,000 - $80,000 / year
+                </div>
+
+                <button class="apply-btn"
+                        onclick="applyJob('Data Analyst')">
+                    Apply Now
+                </button>
+
+            </div>
+
+
+            <!-- JOB 4 -->
+
+            <div class="job-card">
+
+                <div class="company-logo">
+                    ∞
+                </div>
+
+                <h3>UI/UX Designer</h3>
+
+                <div class="company">
+                    Meta
+                </div>
+
+                <div class="job-info">
+                    📍 Cairo, Egypt<br>
+                    💼 Full-time<br>
+                    💰 $70,000 - $100,000 / year
+                </div>
+
+                <button class="apply-btn"
+                        onclick="applyJob('UI/UX Designer')">
+                    Apply Now
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= CTA ================= -->
+
+    <section class="cta">
+
+        <div class="cta-content">
+
+            <div class="cta-icon">
+                ➤
+            </div>
+
+            <div>
+                <h2>Ready to get hired?</h2>
+
+                <p>
+                    Create your free account today and start applying
+                    to thousands of jobs.
+                </p>
+            </div>
+
+        </div>
+
+        <a href="#" class="cta-button">
+            Sign Up Now
+        </a>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer id="contact">
+
+        <div>
+
+            <div class="logo">
+                💼 Job<span>Connect</span>
+            </div>
+
+            <p>
+                Better Jobs. Brighter Futures.
+            </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <a href="#">Home</a>
+            <a href="#jobs">Jobs</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+
+        </div>
+
+
+        <div class="social">
+            LinkedIn &nbsp; Twitter &nbsp; Facebook
+        </div>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        function searchJobs() {
+
+            let keyword =
+                document.getElementById("keyword").value;
+
+            let location =
+                document.getElementById("location").value;
+
+            let category =
+                document.getElementById("category").value;
+
+            if (
+                keyword === "" &&
+                location === "" &&
+                category === ""
+            ) {
+
+                alert("Please enter a job, location, or category.");
+
+            } else {
+
+                alert(
+                    "Searching for jobs...\n\n" +
+                    "Job: " + keyword +
+                    "\nLocation: " + location +
+                    "\nCategory: " + category
+                );
+
+            }
+        }
+
+
+        function applyJob(job) {
+
+            alert(
+                "You selected: " +
+                job +
+                "\n\nApplication page coming soon!"
+            );
+
+        }
+
+    </script>
+
+</body>
+</html>
